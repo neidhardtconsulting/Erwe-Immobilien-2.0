@@ -29,14 +29,16 @@
     --body:    "Switzer", system-ui, sans-serif;
     --mono:    "IBM Plex Mono", ui-monospace, monospace;
 
-    /* Skala · design.md §4 */
-    --t-display-xl: clamp(2.1rem, 7.5vw, 5.5rem);
-    --t-display-l:  clamp(1.9rem, 4vw,   3.1rem);
-    --t-display-m:  clamp(1.5rem, 2.6vw, 2.1rem);
-    --t-lede:       clamp(1.05rem, 1.6vw, 1.3rem);
-    --t-body:       1rem;
-    --t-small:      0.875rem;
-    --t-utility:    0.72rem;
+    /* Skala · design.md §4 — Größenraster an brookfield.com angeglichen
+       (deren gemessene rem-Werte, html{font-size:10px} → 1rem=10px dort;
+       hier auf 1rem=16px umgerechnet: Season Mix 64/66px, 42/44px etc.) */
+    --t-display-xl: clamp(2.6rem, 7vw,   6.4rem);   /* 64px @ Desktop, lh 1.03, ls -.01em */
+    --t-display-l:  clamp(2.2rem, 4.2vw, 4.2rem);   /* 42px @ Desktop, lh 1.05, ls -.01em */
+    --t-display-m:  clamp(1.75rem, 2.6vw, 2.8rem);  /* 28px @ Desktop */
+    --t-lede:       clamp(1.125rem, 1.4vw, 1.25rem); /* 18–20px */
+    --t-body:       1.125rem;                        /* 18px — Season Sans Basiswert */
+    --t-small:      0.8125rem;                       /* 13px */
+    --t-utility:    clamp(0.875rem, 1vw, 1rem);      /* 14–16px, Eyebrow/Label-Skala */
 
     --gutter: 24px;
     --pad:    clamp(1.25rem, 5vw, 5rem);
@@ -75,14 +77,17 @@
 
   /* ═══ Typografie ═══════════════════════════════════════════ */
   h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; }
-  h2 { font-size: var(--t-display-l); line-height: 1.05; letter-spacing: -0.025em; }
-  h3 { font-size: var(--t-display-m); line-height: 1.1;  letter-spacing: -0.02em; }
+  h2 { font-size: var(--t-display-l); line-height: 1.05; letter-spacing: -0.01em; }
+  h3 { font-size: var(--t-display-m); line-height: 1.07; letter-spacing: -0.01em; }
   p  { margin: 0; }
 
+  /* Eyebrow-Skala/Tracking an brookfield.com angeglichen (deren "eyebrow"-Klasse:
+     14–16px, weight ~650, letter-spacing .02em) — Schrift/Großschreibung bleiben ERWE-eigen. */
   .eyebrow {
     font-family: var(--mono);
     font-size: var(--t-utility);
-    letter-spacing: 0.16em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--muted);
     margin: 0;
@@ -167,7 +172,7 @@
     .nav::-webkit-scrollbar { display: none; }
     .nav a {
       font-family: var(--mono); font-size: 0.7rem;
-      letter-spacing: 0.12em; text-transform: uppercase;
+      letter-spacing: 0.02em; text-transform: uppercase;
       white-space: nowrap; min-height: 0; padding-block: 0.7rem;
     }
     .nav a .wline { display: none; }
@@ -234,9 +239,14 @@
   .metrics div { padding-block: 0.35rem; }
   .metrics dt {
     font-family: var(--mono); font-size: var(--t-utility);
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted);
   }
-  .metrics dd { margin: 0.2rem 0 0; font-family: var(--mono); font-size: 0.95rem; color: var(--ink); }
+  /* Große Zahl/Label-Skalenkontrast wie brookfield.com Kennzahlen-Panel ("$1T+"-Muster);
+     Ziffern bleiben in Mono, wie design.md §9 für Kapitalmarktdaten vorschreibt. */
+  .metrics dd {
+    margin: 0.3rem 0 0; font-family: var(--mono); font-weight: 500;
+    font-size: clamp(1.25rem, 1.8vw, 1.75rem); letter-spacing: -0.01em; color: var(--ink);
+  }
 
   /* ═══ Platzhalterblöcke für Bilder ═════════════════════════ */
   .ph-img {
@@ -247,13 +257,13 @@
   }
   .ph-img span {
     font-family: var(--mono); font-size: var(--t-utility);
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted);
     max-width: 42ch; line-height: 1.7;
   }
   .ph-img::before {
     content: "Platzhalter";
     position: absolute; top: 0; left: 0;
-    font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+    font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.02em;
     text-transform: uppercase; color: var(--bg); background: var(--muted);
     padding: 0.2em 0.6em;
   }
@@ -263,9 +273,33 @@
 
   /* ═══ Echte Fotos (ersetzen .ph-img je Slot, Schritt 4) ═════ */
   .photo { position: relative; overflow: hidden; background: var(--surface); }
-  .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .photo img {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.3s ease-in-out; /* Hover-Zoom, brookfield.com-Effekt */
+  }
   .obj .photo { aspect-ratio: 4 / 3; }
   .obj-b .photo { aspect-ratio: 3 / 4; }
+  .obj:hover .photo img, .obj:focus-within .photo img { transform: scale(1.05); }
+
+  /* ═══ Vollbild-Medienfläche (brookfield.com „full-width-video-embed") ══ */
+  .media-feature {
+    position: relative; overflow: hidden; margin: var(--rhythm) 0 0;
+    min-height: clamp(320px, 55vw, 640px);
+    display: flex; align-items: flex-end;
+  }
+  .media-feature .photo { position: absolute; inset: 0; }
+  .media-feature .photo img { width: 100%; height: 100%; }
+  .media-feature-scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, color-mix(in oklch, var(--ink) 78%, transparent) 0%, transparent 55%);
+  }
+  .media-feature-text {
+    position: relative; z-index: 1; color: var(--bg);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    max-width: 46ch;
+  }
+  .media-feature-text .eyebrow { color: var(--bg); opacity: 0.85; }
+  .media-feature-text h3 { color: var(--bg); margin-top: 0.75rem; }
 
   /* ═══ Sektionskopf (asymmetrisch, §5) ══════════════════════ */
   .sec-head { grid-column: 1 / 6; }
@@ -286,7 +320,7 @@
     margin: 1rem 0 0; display: grid; grid-template-columns: max-content 1fr;
     gap: 0.35rem 1.5rem; font-size: var(--t-small);
   }
-  .obj dt { color: var(--muted); font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.14em; text-transform: uppercase; align-self: center; }
+  .obj dt { color: var(--muted); font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.02em; text-transform: uppercase; align-self: center; }
   .obj dd { margin: 0; }
 
   /* ═══ Tabelle ══════════════════════════════════════════════ */
@@ -296,7 +330,7 @@
   th, td { text-align: left; padding: 0.9rem 1rem 0.9rem 0; border-bottom: 1px solid var(--line); }
   thead th {
     font-family: var(--mono); font-size: var(--t-utility); font-weight: 500;
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted);
     border-bottom-color: var(--line-strong);
   }
   td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; padding-right: 0; }
@@ -312,7 +346,7 @@
   }
   blockquote footer {
     font-family: var(--mono); font-size: var(--t-utility);
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted);
     margin-top: 1rem; font-weight: 400;
   }
 
@@ -326,9 +360,9 @@
     transition: background-color 160ms var(--ease), padding-left 160ms var(--ease);
   }
   .row:hover { background: var(--surface); padding-left: 1rem; }
-  .row .date { font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.12em; color: var(--muted); flex: none; min-width: 8.5em; }
+  .row .date { font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.02em; color: var(--muted); flex: none; min-width: 8.5em; }
   .row .title { font-weight: 500; flex: 1 1 18ch; }
-  .row .meta { font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-left: auto; }
+  .row .meta { font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); margin-left: auto; }
 
   /* ═══ Kontaktband ══════════════════════════════════════════ */
   .contact { background: var(--accent); color: var(--bg); margin-top: var(--rhythm); }
@@ -342,7 +376,7 @@
   .contact dl { margin: 1.25rem 0 0; }
   .contact dt {
     font-family: var(--mono); font-size: var(--t-utility);
-    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75; margin-top: 1rem;
+    letter-spacing: 0.02em; text-transform: uppercase; opacity: 0.75; margin-top: 1rem;
   }
   .contact dd { margin: 0.15rem 0 0; }
   .contact .ph { color: inherit; opacity: 0.8; border-bottom-color: currentColor; }
@@ -358,7 +392,7 @@
   @media (max-width: 899px) { .foot-col { grid-column: 1 !important; } }
   .foot-col h3 {
     font-family: var(--mono); font-size: var(--t-utility); font-weight: 500;
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+    letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
   }
   .foot-col ul { list-style: none; margin: 0; padding: 0; }
   .foot-col li + li { margin-top: 0.5rem; }
@@ -368,7 +402,7 @@
     margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
     display: flex; gap: 1.5rem; flex-wrap: wrap;
     font-family: var(--mono); font-size: var(--t-utility);
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted);
   }
 
   /* ═══ Motion · design.md §7 — Stil „Ruhig" ═════════════════ */
@@ -590,10 +624,6 @@
           um die Bilanzrelationen zu verbessern.
         </p>
 
-        <figure class="hero-figure">
-          <div class="photo" style="aspect-ratio:16/9"><img src="assets/unternehmen.jpg" alt="Innenraum eines Bürogebäudes, Personen in Bewegungsunschärfe" loading="lazy"></div>
-        </figure>
-
         <blockquote>
           <p>„Das Konzept stabilisiert die Gesellschaft und schafft die Basis für den Fortbestand
           in einem sich langsam erholenden Branchenumfeld.“</p>
@@ -601,6 +631,19 @@
         </blockquote>
       </div>
     </div>
+
+    <!-- Vollbild-Medienfläche, Anordnung wie brookfield.com „full-width-video-embed":
+         großformatige Fläche, Eyebrow + Überschrift unten verankert. Reales ERWE-Videomaterial
+         existiert nicht (auf erwe-ag.com geprüft) — deshalb ein reales ERWE-Foto statt Fremd-
+         oder Stockvideo; die Anordnung entspricht dem Vorbild 1:1. -->
+    <figure class="media-feature reveal">
+      <div class="photo"><img src="assets/unternehmen.jpg" alt="Innenraum eines Bürogebäudes im Umbau" loading="lazy"></div>
+      <div class="media-feature-scrim" aria-hidden="true"></div>
+      <figcaption class="media-feature-text">
+        <span class="eyebrow">Umnutzung statt Abriss</span>
+        <h3>Vom leerstehenden Handelsbau zur gemischt genutzten Fläche</h3>
+      </figcaption>
+    </figure>
   </section>
 
   <div class="wrap divider" aria-hidden="true">

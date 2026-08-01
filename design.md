@@ -96,14 +96,22 @@ nach McKinsey-Farbe (deren Blau ist violettstichig, Hue ≈ 265).
 **Skala** (fluid, clamp)
 
 ```css
---t-display-xl: clamp(2.4rem, 7.5vw, 5.5rem);   /* Hero-These          — Zodiak 700, lh .98, ls -.03em */
---t-display-l:  clamp(1.9rem, 4vw,   3.1rem);   /* Sektionstitel       — Zodiak 700, lh 1.05, ls -.025em */
---t-display-m:  clamp(1.5rem, 2.6vw, 2.1rem);   /* Objektnamen, Zahlen — Zodiak 700, lh 1.1,  ls -.02em */
---t-lede:       clamp(1.05rem, 1.6vw, 1.3rem);  /* Lede                — Switzer 400, lh 1.6 */
---t-body:       1rem;                            /* Fließtext           — Switzer 400, lh 1.7 */
---t-small:      0.875rem;                        /* Bildunterschrift    — Switzer 400, lh 1.55 */
---t-utility:    0.72rem;                         /* Labels              — Plex Mono, ls .16em, uppercase */
+--t-display-xl: clamp(2.6rem, 7vw,   6.4rem);   /* Hero-These          — Zodiak 700, lh 1.03, ls -.01em */
+--t-display-l:  clamp(2.2rem, 4.2vw, 4.2rem);   /* Sektionstitel       — Zodiak 700, lh 1.05, ls -.01em */
+--t-display-m:  clamp(1.75rem, 2.6vw, 2.8rem);  /* Objektnamen, Zahlen — Zodiak 700, lh 1.07, ls -.01em */
+--t-lede:       clamp(1.125rem, 1.4vw, 1.25rem); /* Lede                — Switzer 400, lh 1.6 */
+--t-body:       1.125rem;                        /* Fließtext           — Switzer 400, lh 1.7 */
+--t-small:      0.8125rem;                       /* Bildunterschrift    — Switzer 400, lh 1.55 */
+--t-utility:    clamp(0.875rem, 1vw, 1rem);      /* Labels              — Plex Mono, ls .02em, uppercase */
 ```
+
+> **Abweichung 2026-08-02:** Größenraster (Endwerte, Letter-Spacing) 1:1 an die gemessenen
+> Werte von brookfield.com angeglichen (deren `text-display-64-420`, `text-serif-42-420`,
+> Body `18px`, Eyebrow-Tracking `.02em` statt zuvor `.16em`) — auf Wunsch, um „Schriftgröße
+> und Anordnung exakt genauso" zu übernehmen. **Nicht** übernommen: Brookfields eigene
+> Schriftdateien (`Season Mix`/`Season Sans`, proprietär, Blaze Type) und ihre warme
+> Creme-Neutralpalette — Zodiak/Switzer/Plex Mono und die Blau-Palette aus §3 bleiben, weil
+> beides nicht angefragt war und §3/§12 sonst widersprechen würde. Siehe §13.
 
 **Do**
 
@@ -175,6 +183,9 @@ W-Linien pro Viewport.
 
 - W-Linie zeichnet sich beim Sektionseintritt über `stroke-dashoffset`, `600ms`.
 - Links: Farbwechsel `--ink → --accent` in `160ms`. Sonst nichts.
+- Bildkarten (Objektkarten, Medienfläche): `transform: scale(1.05)` auf Hover/Focus,
+  `transition: transform .3s ease-in-out` — 1:1 der Hover-Zoom-Effekt von brookfield.com
+  (Abweichung 2026-08-02, auf Wunsch). Kein Parallax, keine Bewegung ohne Interaktion.
 
 **Zurückhaltungsregel**
 
@@ -195,7 +206,7 @@ W-Linien pro Viewport.
 | Komponente | Verhalten |
 |---|---|
 | **Header** | Logo links (`--ink`), 4 Navigationspunkte, rechts „Investor Relations“ als `--accent`-Button. Sticky, schrumpfend. |
-| **Hero** | These dreizeilig, Lede, Kennzahlenleiste. Kein Bild hinter dem Text — Bild darunter, volle Breite. |
+| **Hero** | These dreizeilig, Lede, Kennzahlenleiste. Vollbild-Fotostrecke (Crossfade, reale ERWE-Motive) liegt als Hintergrund hinter dem Text, mit Scrim für Lesbarkeit (Abweichung 2026-08-02, auf Wunsch). |
 | **Kennzahlenleiste** | Horizontale Reihe, oben und unten `--line`, Plex Mono versal. Label `--muted`, Wert `--ink`. |
 | **Objektkarte** | Bild 4:3, darüber Utility-Zeile mit Stadt, darunter Objektname in Zodiak, drei Datenzeilen (Nutzung / Fläche / Status). Kein Rahmen, kein Schatten. |
 | **Portfolio-Tabelle** | Echte `<table>`. Zeilen durch `--line` getrennt, Zahlen Plex Mono rechtsbündig, Kopfzeile Utility. |
@@ -242,7 +253,7 @@ Flughafenpassage. Das wird ersatzlos gestrichen. **Gezeigt werden Gebäude.**
 |---|---|---|---|
 | Hero | Postgalerie Speyer, Frontalansicht der Sandsteinfassade | Vormittagslicht, Himmel oben leicht angeschnitten, streng frontal | Objektfoto ERWE, neu fotografieren lassen; für den Pitch: bestehende Aufnahme, farbkorrigiert |
 | Portfolio | Je ein Objekt, gleiche Perspektive | Alle 4:3, alle frontal, alle Tageslicht — die Serie muss als Serie lesbar sein | ERWE-Bestand; Lücken durch Architekturaufnahmen deutscher Innenstadtbauten schließen |
-| Unternehmen | Innenraum einer laufenden Umnutzung | Rohbau oder frisch übergebene Fläche, natürliches Licht, keine Personen im Fokus | Neu zu erstellen |
+| Unternehmen | Innenraum einer laufenden Umnutzung, als Vollbild-Medienfläche mit Eyebrow+Headline unten (`.media-feature`, Abweichung 2026-08-02) | Rohbau oder frisch übergebene Fläche, natürliches Licht, keine Personen im Fokus | ERWE-Bestand (`unternehmen.jpg`) |
 | Kontakt | Kein Bild | Die `--accent`-Fläche trägt allein | — |
 
 **Bildregeln**
@@ -298,6 +309,7 @@ Alle Assets liegen in `assets/`. Logo: `assets/erwe-logo.svg` (Original in `#236
 | ERWE-Wortmarke (`#236384`, `#6e6e6e`) | Herkunft des Akzentblaus und der W-Zacke. |
 | Postgalerie Speyer — Sandsteinfassade, Mansarddach | Material- und Lichtreferenz für die Bildserie. |
 | [erwe-ag.com](https://www.erwe-ag.com) (Bestand) | Inhaltliche Vollständigkeit — Struktur und Optik werden ersetzt. |
+| [brookfield.com](https://www.brookfield.com) (Abweichung 2026-08-02) | Größenraster (Endwerte, Tracking), Hover-Zoom auf Bildkarten, Vollbild-Medienfläche mit Eyebrow+Headline unten verankert (`.media-feature`, ersetzt deren Autoplay-Video-Sektion — reales ERWE-Videomaterial existiert nicht, geprüft auf erwe-ag.com; stattdessen ein reales ERWE-Foto in identischer Anordnung). **Nicht** übernommen: deren Schriftdateien (proprietär), Creme-Palette, Autoplay-Video selbst, Karussells. |
 
 ---
 
