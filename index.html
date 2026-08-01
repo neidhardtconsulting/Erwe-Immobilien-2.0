@@ -220,6 +220,13 @@
   .hero-figure .ph-img { aspect-ratio: 21 / 9; }
   figcaption { font-size: var(--t-small); color: var(--muted); margin-top: 0.75rem; }
 
+  /* ═══ Echte Fotos (ersetzen .ph-img je Slot, Schritt 4) ═════ */
+  .photo { position: relative; overflow: hidden; background: var(--surface); }
+  .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .hero-figure .photo { aspect-ratio: 21 / 9; }
+  .obj .photo { aspect-ratio: 4 / 3; }
+  .obj-b .photo { aspect-ratio: 3 / 4; }
+
   /* ═══ Sektionskopf (asymmetrisch, §5) ══════════════════════ */
   .sec-head { grid-column: 1 / 6; }
   .sec-body { grid-column: 7 / 13; }
@@ -301,9 +308,6 @@
   .contact .ph { color: inherit; opacity: 0.8; border-bottom-color: currentColor; }
   .contact .btn-primary { background: var(--bg); color: var(--accent); margin-top: 2rem; }
   .contact .btn-primary:hover { background: var(--ink); color: var(--bg); }
-  .ph-map { aspect-ratio: 16 / 9; margin-top: 1.5rem; background: transparent; border-color: var(--bg); }
-  .ph-map span { color: var(--bg); }
-  .ph-map::before { background: var(--bg); color: var(--accent); }
   .contact-sign { margin-top: var(--rhythm); }
   .contact-sign .wline { height: 40px; }
 
@@ -410,8 +414,9 @@
 
       <p class="lede reveal" style="--d:2">
         ERWE erwirbt Gewerbeimmobilien in den A-Lagen deutscher Innenstädte und entwickelt sie
-        zu Standorten mit gemischter Nutzung. Von Speyer bis Lübeck — gehalten im eigenen
-        Bestand, nicht weiterverkauft.
+        zu Standorten mit gemischter Nutzung. Fünf Objekte hält die Gesellschaft im eigenen
+        Bestand, von Coesfeld bis Bremerhaven. Weitere Häuser wie die Postgalerie Speyer
+        verwaltet ERWE als Asset- und Property-Manager für Dritte.
       </p>
 
       <div class="hero-actions reveal" style="--d:2">
@@ -421,18 +426,18 @@
 
       <!-- Conversion §11.3 — Aktienkennzahl im Hero -->
       <dl class="metrics reveal" style="--d:2">
-        <div><dt>WKN</dt><dd class="ph">[Platzhalter]</dd></div>
-        <div><dt>ISIN</dt><dd class="ph">[Platzhalter]</dd></div>
-        <div><dt>Handelssegment</dt><dd class="ph">[Platzhalter]</dd></div>
-        <div><dt>Objekte im Bestand</dt><dd class="ph">[Platzhalter]</dd></div>
+        <div><dt>WKN</dt><dd>A1X3WX</dd></div>
+        <div><dt>ISIN</dt><dd>DE000A1X3WX6</dd></div>
+        <div><dt>Handelssegment</dt><dd>Basic Board</dd></div>
+        <div><dt>Objekte im Bestand</dt><dd>5</dd></div>
       </dl>
     </div>
 
     <figure class="hero-figure wrap reveal">
-      <div class="ph-img">
-        <span>Hero — Postgalerie Speyer, Frontalansicht der Sandsteinfassade, Vormittagslicht, streng frontal, Himmel oben angeschnitten</span>
+      <div class="photo">
+        <img src="assets/hero-postgalerie-speyer.jpg" alt="Postgalerie Speyer, Postplatz 1 — Frontalansicht der Fassade" loading="eager">
       </div>
-      <figcaption class="ph">Bildunterschrift — Objekt, Stadt, Straße</figcaption>
+      <figcaption>Postgalerie Speyer, Postplatz 1 — verwaltet von ERWE als Asset- und Property-Manager</figcaption>
     </figure>
   </section>
 
@@ -444,50 +449,51 @@
   <section id="portfolio" aria-labelledby="h-portfolio">
     <div class="wrap grid12">
       <div class="sec-head reveal">
-        <p class="eyebrow">01 — Portfolio · Platzhalter</p>
-        <h2 id="h-portfolio"><span class="ph">Überschrift als Aussage, nicht als Etikett</span></h2>
+        <p class="eyebrow">01 — Portfolio</p>
+        <h2 id="h-portfolio">ERWE baut ihren Bestand Objekt für Objekt in kleinen und mittleren Innenstädten auf</h2>
       </div>
 
       <div class="sec-body reveal" style="--d:1">
-        <p class="prose ph">
-          Platzhaltertext für den Einführungsabsatz zum Bestand. Hier stehen später zwei bis drei
-          Sätze mit Zahlen statt Adjektiven — Anzahl der Standorte, Gesamtfläche, Anteil vermietet.
-          Jede Aussage bekommt Stadt und Straße.
+        <p class="prose">
+          Der Bestand umfasst fünf Objekte in fünf Städten — Coesfeld, Friedrichsdorf, Darmstadt,
+          Wuppertal und Bremerhaven. Zwei davon sind vollständig an C&amp;A vermietet, eines zu 97%
+          an Einzelhandel, Wohnen und Parken. Hinzu kommen Mandate als Asset- und Property-Manager
+          für Dritte, etwa in Speyer und Lübeck.
         </p>
       </div>
     </div>
 
     <div class="wrap grid12 objects">
       <article class="obj obj-a reveal">
-        <div class="ph-img"><span>Objekt 1 — Frontalansicht, 4:3, Tageslicht</span></div>
-        <p class="eyebrow">Stadt · Straße</p>
-        <h3 class="ph">Objektname</h3>
+        <div class="photo"><img src="assets/obj-coesfeld.jpg" alt="Kupferpassage Coesfeld, Frontalansicht" loading="lazy"></div>
+        <p class="eyebrow">Coesfeld · Fußgängerzone</p>
+        <h3>Kupferpassage Coesfeld</h3>
         <dl>
-          <dt>Nutzung</dt><dd class="ph">[Platzhalter]</dd>
-          <dt>Fläche</dt><dd class="ph num">[Platzhalter]</dd>
-          <dt>Status</dt><dd class="ph">[Platzhalter]</dd>
+          <dt>Nutzung</dt><dd>Einzelhandel, Wohnen, Parken</dd>
+          <dt>Fläche</dt><dd class="num">16.000 m²</dd>
+          <dt>Status</dt><dd>97% vermietet</dd>
         </dl>
       </article>
 
       <article class="obj obj-b reveal" style="--d:1">
-        <div class="ph-img"><span>Objekt 2 — Hochformat, 3:4</span></div>
-        <p class="eyebrow">Stadt · Straße</p>
-        <h3 class="ph">Objektname</h3>
+        <div class="photo"><img src="assets/obj-wuppertal.jpg" alt="C&A-Haus Wuppertal, Herzogstraße" loading="lazy"></div>
+        <p class="eyebrow">Wuppertal-Elberfeld · Herzogstraße</p>
+        <h3>C&amp;A-Haus Wuppertal</h3>
         <dl>
-          <dt>Nutzung</dt><dd class="ph">[Platzhalter]</dd>
-          <dt>Fläche</dt><dd class="ph num">[Platzhalter]</dd>
-          <dt>Status</dt><dd class="ph">[Platzhalter]</dd>
+          <dt>Nutzung</dt><dd>Einzelhandel (C&amp;A)</dd>
+          <dt>Fläche</dt><dd class="num">10.000 m²</dd>
+          <dt>Status</dt><dd>Vollvermietet</dd>
         </dl>
       </article>
 
       <article class="obj obj-c reveal">
-        <div class="ph-img"><span>Objekt 3 — Frontalansicht, 4:3, Tageslicht</span></div>
-        <p class="eyebrow">Stadt · Straße</p>
-        <h3 class="ph">Objektname</h3>
+        <div class="photo"><img src="assets/obj-friedrichsdorf.jpg" alt="Grundstücke in Friedrichsdorf, Luftaufnahme" loading="lazy"></div>
+        <p class="eyebrow">Friedrichsdorf</p>
+        <h3>Grundstücke in Friedrichsdorf</h3>
         <dl>
-          <dt>Nutzung</dt><dd class="ph">[Platzhalter]</dd>
-          <dt>Fläche</dt><dd class="ph num">[Platzhalter]</dd>
-          <dt>Status</dt><dd class="ph">[Platzhalter]</dd>
+          <dt>Nutzung</dt><dd>Projektentwicklung (Datencenter, Logistik, Light Industrial)</dd>
+          <dt>Fläche</dt><dd class="num">4,4 ha</dd>
+          <dt>Status</dt><dd>In Neuplanung</dd>
         </dl>
       </article>
     </div>
@@ -495,7 +501,7 @@
     <div class="wrap">
       <div class="table-scroll reveal">
         <table>
-          <caption class="eyebrow">Gesamtbestand — Platzhalterzeilen</caption>
+          <caption class="eyebrow">Gesamtbestand — fünf Objekte</caption>
           <thead>
             <tr>
               <th scope="col">Objekt</th>
@@ -506,11 +512,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
-            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
-            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
-            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
-            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
+            <tr><td>Kupferpassage Coesfeld</td><td>Coesfeld</td><td>Einzelhandel, Wohnen, Parken</td><td class="n">16.000 m²</td><td>97% vermietet</td></tr>
+            <tr><td>Grundstücke Friedrichsdorf</td><td>Friedrichsdorf</td><td>Projektentwicklung</td><td class="n">4,4 ha</td><td>In Neuplanung</td></tr>
+            <tr><td>Geschäftshaus Darmstadt</td><td>Darmstadt</td><td>Einzelhandel (Revitalisierung geplant)</td><td class="n">1.000 m²</td><td>Leerstand, Revitalisierung geplant</td></tr>
+            <tr><td>C&amp;A-Haus Wuppertal</td><td>Wuppertal</td><td>Einzelhandel (C&amp;A)</td><td class="n">10.000 m²</td><td>Vollvermietet</td></tr>
+            <tr><td>C&amp;A-Haus Bremerhaven</td><td>Bremerhaven</td><td>Einzelhandel (C&amp;A)</td><td class="n">–</td><td>Vermietet, Repositionierung geplant</td></tr>
           </tbody>
         </table>
       </div>
@@ -525,27 +531,31 @@
   <section id="unternehmen" aria-labelledby="h-unternehmen">
     <div class="wrap grid12">
       <div class="sec-head reveal">
-        <p class="eyebrow">02 — Unternehmen · Platzhalter</p>
-        <h2 id="h-unternehmen"><span class="ph">Umnutzung statt Abriss</span></h2>
+        <p class="eyebrow">02 — Unternehmen</p>
+        <h2 id="h-unternehmen">Umnutzung statt Abriss</h2>
       </div>
 
       <div class="sec-body reveal" style="--d:1">
-        <p class="prose ph">
-          Platzhalter für den Kernabsatz: warum ERWE leerstehende Handelsflächen kauft, statt
-          Neubauflächen zu entwickeln. Ein Gedanke pro Satz, Sätze unter zwanzig Wörtern.
+        <p class="prose">
+          ERWE kauft leerstehende oder unterausgelastete Handelsimmobilien in A-Lagen. Aus
+          ehemaligen Einzelhandelsflächen entstehen Büro-, Hotel-, Wohn- und Dienstleistungsflächen
+          — je nach lokaler Nachfrage.
         </p>
-        <p class="prose ph">
-          Zweiter Platzhalterabsatz zur Bestandshaltung und zum Stand der Restrukturierung.
-          Benannt, nicht umschrieben — Verschweigen kostet mehr Glaubwürdigkeit als Zugeben.
+        <p class="prose">
+          Seit 2023 steht die Gesellschaft in Verhandlungen mit den Gläubigern ihrer Anleihe
+          2019/2023 über deren finanzielle Restrukturierung. Im Mai 2026 hat der Vorstand
+          zusätzlich eine Kapitalherabsetzung mit anschließender Kapitalerhöhung vorgeschlagen,
+          um die Bilanzrelationen zu verbessern.
         </p>
 
         <figure class="hero-figure">
-          <div class="ph-img" style="aspect-ratio:16/9"><span>Unternehmen — Innenraum einer laufenden Umnutzung, Rohbau oder frisch übergebene Fläche, natürliches Licht, keine Personen im Fokus</span></div>
+          <div class="photo" style="aspect-ratio:16/9"><img src="assets/unternehmen.jpg" alt="Innenraum eines Bürogebäudes, Personen in Bewegungsunschärfe" loading="lazy"></div>
         </figure>
 
         <blockquote>
-          <p class="ph">Platzhalter für ein Zitat aus dem Vorstand. Maximal vierzig Zeichen pro Zeile, keine Anführungsgrafik.</p>
-          <footer class="ph">Name · Funktion</footer>
+          <p>„Das Konzept stabilisiert die Gesellschaft und schafft die Basis für den Fortbestand
+          in einem sich langsam erholenden Branchenumfeld.“</p>
+          <footer>Rüdiger Weitzel · Vorstand, ERWE Immobilien AG — Corporate News, 2. April 2024</footer>
         </blockquote>
       </div>
     </div>
@@ -559,22 +569,23 @@
   <section id="ir" aria-labelledby="h-ir">
     <div class="wrap grid12">
       <div class="sec-head reveal">
-        <p class="eyebrow">03 — Investor Relations · Platzhalter</p>
-        <h2 id="h-ir"><span class="ph">Zahlen, Berichte, Stand der Restrukturierung</span></h2>
+        <p class="eyebrow">03 — Investor Relations</p>
+        <h2 id="h-ir">Zahlen, Berichte, Stand der Restrukturierung</h2>
       </div>
 
       <div class="sec-body reveal" style="--d:1">
-        <p class="prose ph">
-          Platzhalter für den Einführungsabsatz zu Aktie und Anleihe. Kein Live-Kurs-Widget,
-          keine Prognosen, keine Renditeaussagen.
+        <p class="prose">
+          Die Aktie (WKN A1X3WX, ISIN DE000A1X3WX6) notiert im Basic Board der Frankfurter
+          Wertpapierbörse. Die Anleihe 2019/2023 (WKN A255D0, ISIN DE000A255D05) befindet sich
+          seit 2023 in der Restrukturierung mit den Anleihegläubigern.
         </p>
 
         <!-- Conversion §11.2 — Geschäftsbericht als Download -->
         <div class="rows">
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Geschäftsbericht — Platzhalter</span><span class="meta ph">PDF · 0,0 MB</span></a>
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Halbjahresfinanzbericht — Platzhalter</span><span class="meta ph">PDF · 0,0 MB</span></a>
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Anleihebedingungen — Platzhalter</span><span class="meta ph">PDF · 0,0 MB</span></a>
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Hauptversammlung — Platzhalter</span><span class="meta ph">PDF · 0,0 MB</span></a>
+          <a class="row" href="https://www.erwe-ag.com/fileadmin/Ablage/03_Investor_Relations/Finanzberichte/Testatsexemplar_ERWE_AG_IFRS_Konzernabschluss_31.12.2023.pdf" target="_blank" rel="noopener"><span class="date">13.05.2026</span><span class="title">Konzernjahresabschluss 2023 (IFRS)</span><span class="meta">PDF · 3,9 MB</span></a>
+          <a class="row" href="https://www.erwe-ag.com/fileadmin/Ablage/03_Investor_Relations/Hauptversammlungen/EinladungHVf%C3%BCr2022_Bundesanzeiger.pdf" target="_blank" rel="noopener"><span class="date">05.08.2025</span><span class="title">Einladung zur Hauptversammlung 2025 (Geschäftsjahr 2022)</span><span class="meta">PDF · 42 KB</span></a>
+          <a class="row" href="https://www.erwe-ag.com/fileadmin/Ablage/03_Investor_Relations/Finanzberichte/Mdt._ERWE_KAP_Testat_2022_Qualifizierte_Signatur.pdf" target="_blank" rel="noopener"><span class="date">26.06.2025</span><span class="title">Konzernjahresabschluss 2022 (IFRS)</span><span class="meta">PDF · 0,8 MB</span></a>
+          <a class="row" href="https://www.erwe-ag.com/fileadmin/Ablage/03_Investor_Relations/Anleihe/ERWE_40_Mio_Terms_and_Conditions_Bearer_Notes_2020.pdf" target="_blank" rel="noopener"><span class="date">18.01.2021</span><span class="title">Anleihebedingungen 2019/2023</span><span class="meta">PDF · 0,3 MB</span></a>
         </div>
       </div>
     </div>
@@ -588,17 +599,17 @@
   <section id="presse" aria-labelledby="h-presse">
     <div class="wrap grid12">
       <div class="sec-head reveal">
-        <p class="eyebrow">04 — Presse · Platzhalter</p>
-        <h2 id="h-presse"><span class="ph">Mitteilungen</span></h2>
+        <p class="eyebrow">04 — Presse</p>
+        <h2 id="h-presse">Mitteilungen</h2>
       </div>
 
       <div class="sec-body reveal" style="--d:1">
         <div class="rows">
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Ad-hoc</span></a>
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Presse</span></a>
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Presse</span></a>
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Ad-hoc</span></a>
-          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Presse</span></a>
+          <a class="row" href="https://www.erwe-ag.com/investor-relations/finanznachrichten/adhoc-mitteilungen/archiv-ad-hoc-mitteilungen/erwe-immobilien-ag-kombinierte-kapitalherabsetzung-und-kapitalerhoehung-gegen-bareinlage-zur-verbesserung-der-bilanzrelationen-vorgeschlagen" target="_blank" rel="noopener"><span class="date">08.05.2026</span><span class="title">Kombinierte Kapitalherabsetzung und Kapitalerhöhung gegen Bareinlage vorgeschlagen</span><span class="meta">Ad-hoc</span></a>
+          <a class="row" href="https://www.erwe-ag.com/investor-relations/finanznachrichten/adhoc-mitteilungen/archiv-ad-hoc-mitteilungen/erwe-immobilien-ag-verlustanzeige-nach-92-abs-1-aktg" target="_blank" rel="noopener"><span class="date">30.03.2026</span><span class="title">Verlustanzeige nach § 92 Abs. 1 AktG</span><span class="meta">Ad-hoc</span></a>
+          <a class="row" href="https://www.erwe-ag.com/fileadmin/Ablage/03_Investor_Relations/Finanznachrichten/Corporate_News/Downloads/ERWE_CN_Restrukturierungsvereinbarung_Anleihe.pdf" target="_blank" rel="noopener"><span class="date">02.04.2024</span><span class="title">ERWE Immobilien AG und Anleihegläubiger schließen Vereinbarung zu finanziellem Restrukturierungskonzept</span><span class="meta">Presse</span></a>
+          <a class="row" href="https://www.erwe-ag.com/fileadmin/Ablage/03_Investor_Relations/Finanznachrichten/Ad-Hoc_Mitteilungen/Downloads/ERWE_Ad-hoc_neue_Restrukturierungsvereinbarung.pdf" target="_blank" rel="noopener"><span class="date">11.12.2023</span><span class="title">Einigung mit Anleihegläubigern und Investoren über neues Restrukturierungskonzept</span><span class="meta">Ad-hoc</span></a>
+          <a class="row" href="https://www.erwe-ag.com/fileadmin/Ablage/03_Investor_Relations/Finanznachrichten/Ad-Hoc_Mitteilungen/Downloads/Ad-hoc_Resturukturierungsmassnahmen.pdf" target="_blank" rel="noopener"><span class="date">11.06.2023</span><span class="title">Beschluss einer umfassenden finanziellen Restrukturierung</span><span class="meta">Ad-hoc</span></a>
         </div>
       </div>
     </div>
@@ -607,28 +618,27 @@
   <!-- ══ Kontaktband ═══════════════════════════════════════ -->
   <section class="contact" id="kontakt" aria-labelledby="h-kontakt">
     <div class="wrap">
-      <p class="eyebrow reveal">05 — Kontakt · Platzhalter</p>
-      <h2 id="h-kontakt" class="reveal" style="--d:1"><span class="ph">Sprechen Sie mit Investor Relations</span></h2>
+      <p class="eyebrow reveal">05 — Kontakt</p>
+      <h2 id="h-kontakt" class="reveal" style="--d:1">Sprechen Sie mit Investor Relations</h2>
 
       <div class="grid12 contact-grid">
         <div class="contact-person reveal">
-          <h3 class="ph">Name der Ansprechpartnerin</h3>
+          <h3>Hans-Christian Haas</h3>
           <dl>
-            <dt>Funktion</dt><dd class="ph">[Platzhalter]</dd>
-            <dt>Telefon</dt><dd><a class="ph num" href="tel:">[Platzhalter]</a></dd>
-            <dt>E-Mail</dt><dd><a class="ph" href="mailto:">[Platzhalter]</a></dd>
-            <dt>Erreichbarkeit</dt><dd class="ph">Mo–Fr, [Platzhalter] Uhr</dd>
+            <dt>Funktion</dt><dd>Investor Relations</dd>
+            <dt>Telefon</dt><dd><a class="num" href="tel:+496996376869-25">+49 69 96376869-25</a></dd>
+            <dt>E-Mail</dt><dd><a href="mailto:h.haas@erwe-ag.com">h.haas@erwe-ag.com</a></dd>
+            <dt>Erreichbarkeit</dt><dd>Mo–Fr, nach Vereinbarung</dd>
           </dl>
-          <a class="btn btn-primary" href="mailto:">Anfrage senden</a>
+          <a class="btn btn-primary" href="mailto:h.haas@erwe-ag.com">Anfrage senden</a>
         </div>
 
         <div class="contact-where reveal" style="--d:1">
           <p class="eyebrow">Sitz der Gesellschaft</p>
-          <address class="ph" style="font-style:normal; margin-top:0.75rem">
-            Straße und Hausnummer — Platzhalter<br>
-            PLZ Stadt — Platzhalter
+          <address style="font-style:normal; margin-top:0.75rem">
+            Herriotstraße 1<br>
+            60528 Frankfurt am Main
           </address>
-          <div class="ph-img ph-map"><span>Karte — Sitz der Gesellschaft, statischer Kartenausschnitt</span></div>
         </div>
       </div>
 
