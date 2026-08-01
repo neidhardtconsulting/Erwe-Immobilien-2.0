@@ -293,7 +293,11 @@ Alle Assets liegen in `assets/`. Logo: `assets/erwe-logo.svg` (Original in `#236
 - Verlaufstext, Glassmorphism, Neon-Glow, Neumorphismus.
 - Creme + Serifenschrift + Terrakotta. Fast-Schwarz + eine grelle Akzentfarbe. Zeitungs-Haarlinien als Deko.
 - Mehr als eine gesättigte Farbe.
-- Hero-Karussell, Auto-Play-Video, hochzählende Zahlen, Parallax.
+- Hero-Karussell (echtes Klick-Karussell mit Pfeilen/Punkten), hochzählende Zahlen, Parallax.
+  Ausnahmen mit Begründung: die Hero-Fotostrecke ist ein automatischer *Crossfade ohne
+  Bedienelemente* (kein Karussell im engeren Sinn, §8) und die Unternehmen-Medienfläche zeigt
+  einen *gemuteten* Auto-Loop ohne Ton (§7/§10/§13) — beides auf Wunsch, um brookfield.com
+  strukturell zu entsprechen. Ein echtes Karussell mit Navigation bleibt ausgeschlossen.
 - Icon-Reihen ohne Inhalt („Kompetenz · Erfahrung · Vertrauen“).
 - Runde Ecken über `2px`, Schlagschatten, Farbverläufe auf Flächen.
 - Inter als Fließtextschrift.
