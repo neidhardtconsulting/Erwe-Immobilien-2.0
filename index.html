@@ -8,107 +8,710 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,700&f[]=switzer@400,500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,700&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; }
 
+  /* ═══ Palette · design.md §3 ═══════════════════════════════ */
   :root {
-    --bg:  oklch(0.985 0.004 240);
-    --ink: oklch(0.235 0.045 245);
+    --bg:          oklch(0.985 0.004 240);
+    --surface:     oklch(0.955 0.011 235);
+    --sky:         oklch(0.885 0.045 232);
+    --ink:         oklch(0.235 0.045 245);
+    --muted:       oklch(0.535 0.024 243);
+    --accent:      oklch(0.550 0.150 235);
+    --line:        oklch(0.235 0.045 245 / 0.14);
+    --line-strong: oklch(0.235 0.045 245 / 0.30);
 
     --display: "Zodiak", Georgia, serif;
     --body:    "Switzer", system-ui, sans-serif;
+    --mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+    /* Skala · design.md §4 */
+    --t-display-xl: clamp(2.1rem, 7.5vw, 5.5rem);
+    --t-display-l:  clamp(1.9rem, 4vw,   3.1rem);
+    --t-display-m:  clamp(1.5rem, 2.6vw, 2.1rem);
+    --t-lede:       clamp(1.05rem, 1.6vw, 1.3rem);
+    --t-body:       1rem;
+    --t-small:      0.875rem;
+    --t-utility:    0.72rem;
+
+    --gutter: 24px;
+    --pad:    clamp(1.25rem, 5vw, 5rem);
+    --rhythm: clamp(4rem, 10vw, 8rem);
+    --ease:   cubic-bezier(.2, .6, .2, 1);
   }
 
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
   body {
     margin: 0;
-    min-height: 100svh;
-    display: grid;
-    align-content: center;
-    gap: clamp(2.5rem, 7vw, 5rem);
-    padding: clamp(3rem, 9vw, 7rem) clamp(1.25rem, 5vw, 5rem);
     background: var(--bg);
     color: var(--ink);
     font-family: var(--body);
+    font-size: var(--t-body);
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
-  .logo {
-    width: clamp(112px, 13vw, 168px);
-    height: auto;
-    display: block;
-    color: var(--ink);
+  /* ═══ Raster · design.md §5 ════════════════════════════════ */
+  .wrap { max-width: 1280px; margin-inline: auto; padding-inline: var(--pad); }
+
+  .grid12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+  }
+  @media (max-width: 899px) {
+    .grid12 { grid-template-columns: minmax(0, 1fr); }
+    .grid12 > * { grid-column: 1 !important; }
   }
 
-  .thesis {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(2.1rem, 8vw, 6rem);
-    line-height: 0.98;
-    letter-spacing: -0.03em;
+  section { padding-block: var(--rhythm); }
+
+  /* ═══ Typografie ═══════════════════════════════════════════ */
+  h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; }
+  h2 { font-size: var(--t-display-l); line-height: 1.05; letter-spacing: -0.025em; }
+  h3 { font-size: var(--t-display-m); line-height: 1.1;  letter-spacing: -0.02em; }
+  p  { margin: 0; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: var(--t-utility);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
     margin: 0;
+  }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .prose { max-width: 62ch; }
+  .prose + .prose { margin-top: 1.25rem; }
+
+  /* Platzhaltertext — wird in Schritt 3 ersetzt */
+  .ph { color: var(--muted); border-bottom: 1px dotted var(--line-strong); }
+
+  /* ═══ Links & Buttons ══════════════════════════════════════ */
+  a { color: inherit; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    min-height: 44px; padding: 0.7rem 1.4rem;
+    font-family: var(--body); font-size: 0.95rem; font-weight: 500;
+    text-decoration: none; border: 1px solid transparent;
+    transition: background-color 160ms var(--ease), color 160ms var(--ease), border-color 160ms var(--ease);
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { background: var(--ink); }
+  .btn-ghost { border-color: var(--line-strong); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--ink); background: var(--surface); }
+
+  :where(a, button, input, select, summary, tr):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* ═══ Signatur: die W-Linie · design.md §6 ═════════════════ */
+  .wline { display: block; width: 100%; height: 22px; overflow: visible; }
+  .wline path {
+    fill: none; stroke: var(--accent); stroke-width: 1.25;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .divider { padding-block: 0; }
+
+  /* ═══ Header · design.md §8 ════════════════════════════════ */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header .bar {
+    height: 88px; display: flex; align-items: center; gap: 2rem;
+    transition: height 240ms var(--ease);
+  }
+  .site-header.compact .bar { height: 60px; }
+
+  .logo { width: clamp(96px, 10vw, 132px); height: auto; display: block; color: var(--ink); flex: none; }
+
+  .nav { display: flex; gap: 1.75rem; margin-left: auto; }
+  .nav a {
+    position: relative; text-decoration: none; font-size: 0.95rem;
+    padding-block: 0.6rem; min-height: 44px; display: inline-flex; align-items: center;
+    transition: color 160ms var(--ease);
+  }
+  .nav a:hover { color: var(--accent); }
+  .nav a .wline {
+    position: absolute; left: 0; right: 0; bottom: 2px; height: 8px;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 240ms var(--ease);
+  }
+  .nav a:hover .wline, .nav a:focus-visible .wline { clip-path: inset(0 0 0 0); }
+  .nav-cta { margin-left: 0; }
+  @media (max-width: 899px) {
+    .site-header .bar,
+    .site-header.compact .bar {
+      height: auto; flex-wrap: wrap; gap: 1rem;
+      padding-block: 0.7rem 0;
+    }
+    .logo { width: 84px; }
+    .nav-cta { margin-left: auto; padding: 0.55rem 0.9rem; font-size: 0.85rem; white-space: nowrap; }
+    .nav {
+      order: 3; flex-basis: 100%; margin-left: 0;
+      gap: 1.25rem; flex-wrap: nowrap; overflow-x: auto;
+      border-top: 1px solid var(--line);
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      white-space: nowrap; min-height: 0; padding-block: 0.7rem;
+    }
+    .nav a .wline { display: none; }
+  }
+
+  /* ═══ Hero ════════════════════════════════════════════════ */
+  .hero { padding-top: clamp(3rem, 8vw, 6rem); }
+  .thesis {
+    font-size: var(--t-display-xl);
+    line-height: 0.98; letter-spacing: -0.03em;
+    margin: 1.5rem 0 0;
   }
   .thesis span { display: block; }
+  .lede { font-size: var(--t-lede); line-height: 1.6; max-width: min(46ch, 100%); margin-top: 1.75rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 
-  .lede {
-    font-size: clamp(1.05rem, 1.7vw, 1.35rem);
-    line-height: 1.6;
-    max-width: min(46ch, 100%);
-    margin: 0;
+  /* Kennzahlenleiste */
+  .metrics {
+    display: flex; flex-wrap: wrap; gap: 0 3rem;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding-block: 1.1rem; margin-top: 3rem;
+  }
+  .metrics div { padding-block: 0.35rem; }
+  .metrics dt {
+    font-family: var(--mono); font-size: var(--t-utility);
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  }
+  .metrics dd { margin: 0.2rem 0 0; font-family: var(--mono); font-size: 0.95rem; color: var(--ink); }
+
+  /* ═══ Platzhalterblöcke für Bilder ═════════════════════════ */
+  .ph-img {
+    position: relative; display: grid; place-items: center;
+    background: var(--surface);
+    border: 1px dashed var(--line-strong);
+    padding: 1.5rem; text-align: center;
+  }
+  .ph-img span {
+    font-family: var(--mono); font-size: var(--t-utility);
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    max-width: 42ch; line-height: 1.7;
+  }
+  .ph-img::before {
+    content: "Platzhalter";
+    position: absolute; top: 0; left: 0;
+    font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--bg); background: var(--muted);
+    padding: 0.2em 0.6em;
+  }
+  .hero-figure { margin: var(--rhythm) 0 0; }
+  .hero-figure .ph-img { aspect-ratio: 21 / 9; }
+  figcaption { font-size: var(--t-small); color: var(--muted); margin-top: 0.75rem; }
+
+  /* ═══ Sektionskopf (asymmetrisch, §5) ══════════════════════ */
+  .sec-head { grid-column: 1 / 6; }
+  .sec-body { grid-column: 7 / 13; }
+  .sec-head h2 { margin-top: 0.75rem; }
+  @media (max-width: 899px) { .sec-head { margin-bottom: 2rem; } }
+
+  /* ═══ Portfolio — bewusst kein gleichförmiges Kartenraster ══ */
+  .objects { margin-top: 3rem; row-gap: clamp(2.5rem, 5vw, 4rem); }
+  .obj-a { grid-column: 1 / 8; }
+  .obj-b { grid-column: 9 / 13; }
+  .obj-c { grid-column: 4 / 11; }
+  .obj .ph-img { aspect-ratio: 4 / 3; }
+  .obj-b .ph-img { aspect-ratio: 3 / 4; }
+  .obj h3 { margin-top: 1rem; }
+  .obj .eyebrow { margin-top: 1rem; }
+  .obj dl {
+    margin: 1rem 0 0; display: grid; grid-template-columns: max-content 1fr;
+    gap: 0.35rem 1.5rem; font-size: var(--t-small);
+  }
+  .obj dt { color: var(--muted); font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.14em; text-transform: uppercase; align-self: center; }
+  .obj dd { margin: 0; }
+
+  /* ═══ Tabelle ══════════════════════════════════════════════ */
+  .table-scroll { overflow-x: auto; margin-top: var(--rhythm); }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; }
+  caption { text-align: left; margin-bottom: 1rem; }
+  th, td { text-align: left; padding: 0.9rem 1rem 0.9rem 0; border-bottom: 1px solid var(--line); }
+  thead th {
+    font-family: var(--mono); font-size: var(--t-utility); font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    border-bottom-color: var(--line-strong);
+  }
+  td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; padding-right: 0; }
+  tbody tr { transition: background-color 160ms var(--ease); }
+  tbody tr:hover { background: var(--surface); }
+
+  /* ═══ Zitat ════════════════════════════════════════════════ */
+  blockquote {
+    margin: var(--rhythm) 0 0;
+    font-family: var(--display); font-weight: 700;
+    font-size: var(--t-display-m); line-height: 1.25; letter-spacing: -0.02em;
+    max-width: 40ch;
+  }
+  blockquote footer {
+    font-family: var(--mono); font-size: var(--t-utility);
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    margin-top: 1rem; font-weight: 400;
   }
 
-  :where(a, button):focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  /* ═══ Downloadliste & Presse ═══════════════════════════════ */
+  .rows { margin-top: 2.5rem; border-top: 1px solid var(--line-strong); }
+  .row {
+    display: flex; align-items: baseline; gap: 1.5rem; flex-wrap: wrap;
+    padding: 1.1rem 1rem 1.1rem 0; min-height: 44px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    transition: background-color 160ms var(--ease), padding-left 160ms var(--ease);
+  }
+  .row:hover { background: var(--surface); padding-left: 1rem; }
+  .row .date { font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.12em; color: var(--muted); flex: none; min-width: 8.5em; }
+  .row .title { font-weight: 500; flex: 1 1 18ch; }
+  .row .meta { font-family: var(--mono); font-size: var(--t-utility); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-left: auto; }
+
+  /* ═══ Kontaktband ══════════════════════════════════════════ */
+  .contact { background: var(--accent); color: var(--bg); margin-top: var(--rhythm); }
+  .contact .eyebrow { color: var(--bg); opacity: 0.75; }
+  .contact h2 { margin-top: 0.75rem; }
+  .contact .wline path { stroke: var(--bg); }
+  .contact a { color: var(--bg); }
+  .contact-grid { row-gap: 2.5rem; margin-top: 3rem; }
+  .contact-person { grid-column: 1 / 6; }
+  .contact-where  { grid-column: 7 / 13; }
+  .contact dl { margin: 1.25rem 0 0; }
+  .contact dt {
+    font-family: var(--mono); font-size: var(--t-utility);
+    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75; margin-top: 1rem;
+  }
+  .contact dd { margin: 0.15rem 0 0; }
+  .contact .ph { color: inherit; opacity: 0.8; border-bottom-color: currentColor; }
+  .contact .btn-primary { background: var(--bg); color: var(--accent); margin-top: 2rem; }
+  .contact .btn-primary:hover { background: var(--ink); color: var(--bg); }
+  .ph-map { aspect-ratio: 16 / 9; margin-top: 1.5rem; background: transparent; border-color: var(--bg); }
+  .ph-map span { color: var(--bg); }
+  .ph-map::before { background: var(--bg); color: var(--accent); }
+  .contact-sign { margin-top: var(--rhythm); }
+  .contact-sign .wline { height: 40px; }
+
+  /* ═══ Footer ═══════════════════════════════════════════════ */
+  .site-footer { border-top: 1px solid var(--line); padding-block: var(--rhythm) 3rem; }
+  .foot-grid { row-gap: 2.5rem; }
+  .foot-col { grid-column: span 3; }
+  @media (max-width: 899px) { .foot-col { grid-column: 1 !important; } }
+  .foot-col h3 {
+    font-family: var(--mono); font-size: var(--t-utility); font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+  }
+  .foot-col ul { list-style: none; margin: 0; padding: 0; }
+  .foot-col li + li { margin-top: 0.5rem; }
+  .foot-col a { text-decoration: none; font-size: var(--t-small); transition: color 160ms var(--ease); }
+  .foot-col a:hover { color: var(--accent); }
+  .foot-legal {
+    margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+    font-family: var(--mono); font-size: var(--t-utility);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  }
+
+  /* ═══ Motion · design.md §7 — Stil „Ruhig" ═════════════════ */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 420ms var(--ease), transform 420ms var(--ease);
+    transition-delay: calc(var(--d, 0) * 60ms);
+  }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  .js .wline path { stroke-dasharray: var(--len, 1400); stroke-dashoffset: var(--len, 1400); }
+  .js .wline.in path { stroke-dashoffset: 0; transition: stroke-dashoffset 600ms var(--ease); }
+  .js .nav .wline path { stroke-dashoffset: 0; }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation: none !important;
-      transition: none !important;
-      scroll-behavior: auto !important;
-    }
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .js .reveal { opacity: 1 !important; transform: none !important; }
+    .js .wline path { stroke-dashoffset: 0 !important; }
   }
 </style>
 </head>
 <body>
 
-  <header>
-    <svg class="logo" viewBox="0 0 399.91 132.85" role="img" aria-label="ERWE Immobilien AG">
-      <g fill="currentColor">
-        <path d="M0,.33H81.22V11.67H14.05V39.48h43V50.59h-43V73.06H81.88v11.6H0Z"/>
-        <path d="M317.78.33H399V12H331.84V39.48h43V50.59h-43V73.06h67.82v11.6H317.78Z"/>
-        <polygon points="203.81 84.75 230.71 21.79 258.12 84.75 268.37 84.75 310.93 0 297.21 0 263.67 66.81 235.12 1.23 226.16 1.23 197.04 69.41 186.77 56.55 171.09 56.55 193.6 84.75 203.81 84.75"/>
-        <path d="M157.76,50.81c12.26,0,17.81-3.58,17.81-15.34V16.67C175.57,4.91,170,.33,157.76.33H91.47V11.67H154.2c6.21,0,9.15,1.24,9.15,8.27V32.2c0,7.19-2.94,7.66-9.15,7.66H91.47v11l38.9-.06,26.1,33.85h17.65L147,50.81Z"/>
-      </g>
-      <g fill="currentColor" opacity="0.55">
-        <path d="M2.54,132.49H0v-17h2.5Z"/>
-        <path d="M54,118.7h0l-12.67,12h-.15l-12.67-12h-.05v13.79H25.94v-17h2.13l13.15,12.38h.05l13.1-12.38h2.18v17H54Z"/>
-        <path d="M107.65,118.7h-.05l-12.67,12h-.15l-12.67-12h0v13.79H79.55v-17h2.13l13.15,12.38h0L108,115.46h2.18v17h-2.51Z"/>
-        <path d="M134.44,130.44A6.78,6.78,0,0,1,131,124a7,7,0,0,1,3.48-6.46c2.33-1.4,6.42-2.41,12-2.41s9.67,1,12,2.41a7,7,0,0,1,3.48,6.46,6.78,6.78,0,0,1-3.48,6.46c-2.33,1.4-6.34,2.41-12,2.41S136.77,131.84,134.44,130.44Zm22.17-1.53a5.8,5.8,0,0,0,0-9.84c-1.88-1.1-5.49-1.85-10.22-1.85s-8.34.75-10.22,1.85a5.8,5.8,0,0,0,.05,9.84c1.91,1.11,5.56,1.83,10.17,1.83S154.7,130,156.61,128.91Z"/>
-        <path d="M206.13,123.53a4.09,4.09,0,0,1,3,4c0,3.25-2.08,5-7,5H181.78v-17H202c5,0,6.51,2.23,6.51,4.51a3.53,3.53,0,0,1-2.33,3.48Zm-3.41-.85c1.63,0,3.21-.6,3.21-2.53,0-1.48-1-2.73-4.29-2.73H184.29v5.26Zm-18.43,1.95v5.91h17.76c3.35,0,4.53-1.08,4.53-2.95s-1.45-3-4.18-3Z"/>
-        <path d="M234,132.49h-2.5v-17H234Z"/>
-        <path d="M260.22,130.39h21.56v2.1H257.72v-17h2.5Z"/>
-        <path d="M300.82,132.49h-2.51v-17h2.51Z"/>
-        <path d="M327.61,124.71v5.68h24.11v2.1H325.1v-17h26.47v2.11h-24v5.18h23v2Z"/>
-        <path d="M374.16,118.37h-.07v14.12h-2.51v-17h2.06c7.88,4.76,15.77,9.42,23.69,14.13h.07V115.46h2.51v17h-2.06C389.94,127.79,382.08,123.1,374.16,118.37Z"/>
-      </g>
-    </svg>
-  </header>
+<!-- ══ Header ══════════════════════════════════════════════ -->
+<header class="site-header" id="top">
+  <div class="wrap bar">
+    <a href="#top" aria-label="ERWE Immobilien AG — Startseite">
+      <svg class="logo" viewBox="0 0 399.91 132.85" role="img" aria-label="ERWE Immobilien AG">
+        <g fill="currentColor">
+          <path d="M0,.33H81.22V11.67H14.05V39.48h43V50.59h-43V73.06H81.88v11.6H0Z"/>
+          <path d="M317.78.33H399V12H331.84V39.48h43V50.59h-43V73.06h67.82v11.6H317.78Z"/>
+          <polygon points="203.81 84.75 230.71 21.79 258.12 84.75 268.37 84.75 310.93 0 297.21 0 263.67 66.81 235.12 1.23 226.16 1.23 197.04 69.41 186.77 56.55 171.09 56.55 193.6 84.75 203.81 84.75"/>
+          <path d="M157.76,50.81c12.26,0,17.81-3.58,17.81-15.34V16.67C175.57,4.91,170,.33,157.76.33H91.47V11.67H154.2c6.21,0,9.15,1.24,9.15,8.27V32.2c0,7.19-2.94,7.66-9.15,7.66H91.47v11l38.9-.06,26.1,33.85h17.65L147,50.81Z"/>
+        </g>
+        <g fill="currentColor" opacity="0.55">
+          <path d="M2.54,132.49H0v-17h2.5Z"/>
+          <path d="M54,118.7h0l-12.67,12h-.15l-12.67-12h-.05v13.79H25.94v-17h2.13l13.15,12.38h.05l13.1-12.38h2.18v17H54Z"/>
+          <path d="M107.65,118.7h-.05l-12.67,12h-.15l-12.67-12h0v13.79H79.55v-17h2.13l13.15,12.38h0L108,115.46h2.18v17h-2.51Z"/>
+          <path d="M134.44,130.44A6.78,6.78,0,0,1,131,124a7,7,0,0,1,3.48-6.46c2.33-1.4,6.42-2.41,12-2.41s9.67,1,12,2.41a7,7,0,0,1,3.48,6.46,6.78,6.78,0,0,1-3.48,6.46c-2.33,1.4-6.34,2.41-12,2.41S136.77,131.84,134.44,130.44Zm22.17-1.53a5.8,5.8,0,0,0,0-9.84c-1.88-1.1-5.49-1.85-10.22-1.85s-8.34.75-10.22,1.85a5.8,5.8,0,0,0,.05,9.84c1.91,1.11,5.56,1.83,10.17,1.83S154.7,130,156.61,128.91Z"/>
+          <path d="M206.13,123.53a4.09,4.09,0,0,1,3,4c0,3.25-2.08,5-7,5H181.78v-17H202c5,0,6.51,2.23,6.51,4.51a3.53,3.53,0,0,1-2.33,3.48Zm-3.41-.85c1.63,0,3.21-.6,3.21-2.53,0-1.48-1-2.73-4.29-2.73H184.29v5.26Zm-18.43,1.95v5.91h17.76c3.35,0,4.53-1.08,4.53-2.95s-1.45-3-4.18-3Z"/>
+          <path d="M234,132.49h-2.5v-17H234Z"/>
+          <path d="M260.22,130.39h21.56v2.1H257.72v-17h2.5Z"/>
+          <path d="M300.82,132.49h-2.51v-17h2.51Z"/>
+          <path d="M327.61,124.71v5.68h24.11v2.1H325.1v-17h26.47v2.11h-24v5.18h23v2Z"/>
+          <path d="M374.16,118.37h-.07v14.12h-2.51v-17h2.06c7.88,4.76,15.77,9.42,23.69,14.13h.07V115.46h2.51v17h-2.06C389.94,127.79,382.08,123.1,374.16,118.37Z"/>
+        </g>
+      </svg>
+    </a>
 
-  <main>
-    <h1 class="thesis">
-      <span>Entwicklung.</span>
-      <span>Verwaltung.</span>
-      <span>Wertsteigerung.</span>
-    </h1>
-  </main>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#portfolio">Portfolio
+        <svg class="wline" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M0,7 L86,7 M86,7 L89,1 L92,7 L95,1 L98,7"/></svg>
+      </a>
+      <a href="#unternehmen">Unternehmen
+        <svg class="wline" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M0,7 L86,7 M86,7 L89,1 L92,7 L95,1 L98,7"/></svg>
+      </a>
+      <a href="#ir">Investor Relations
+        <svg class="wline" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M0,7 L86,7 M86,7 L89,1 L92,7 L95,1 L98,7"/></svg>
+      </a>
+      <a href="#presse">Presse
+        <svg class="wline" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M0,7 L86,7 M86,7 L89,1 L92,7 L95,1 L98,7"/></svg>
+      </a>
+    </nav>
 
-  <p class="lede">
-    ERWE erwirbt Gewerbeimmobilien in den A-Lagen deutscher Innenstädte und entwickelt sie
-    zu Standorten mit gemischter Nutzung. Von Speyer bis Lübeck — gehalten im eigenen
-    Bestand, nicht weiterverkauft.
-  </p>
+    <a class="btn btn-primary nav-cta" href="#kontakt">Kontakt</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ══ Hero ══════════════════════════════════════════════ -->
+  <section class="hero" aria-labelledby="thesis">
+    <div class="wrap">
+      <p class="eyebrow reveal">ERWE Immobilien AG — Gewerbeimmobilien in deutschen Innenstädten</p>
+
+      <h1 class="thesis reveal" id="thesis" style="--d:1">
+        <span>Entwicklung.</span>
+        <span>Verwaltung.</span>
+        <span>Wertsteigerung.</span>
+      </h1>
+
+      <p class="lede reveal" style="--d:2">
+        ERWE erwirbt Gewerbeimmobilien in den A-Lagen deutscher Innenstädte und entwickelt sie
+        zu Standorten mit gemischter Nutzung. Von Speyer bis Lübeck — gehalten im eigenen
+        Bestand, nicht weiterverkauft.
+      </p>
+
+      <div class="hero-actions reveal" style="--d:2">
+        <a class="btn btn-primary" href="#kontakt">Investor Relations kontaktieren</a>
+        <a class="btn btn-ghost" href="#ir">Geschäftsbericht laden</a>
+      </div>
+
+      <!-- Conversion §11.3 — Aktienkennzahl im Hero -->
+      <dl class="metrics reveal" style="--d:2">
+        <div><dt>WKN</dt><dd class="ph">[Platzhalter]</dd></div>
+        <div><dt>ISIN</dt><dd class="ph">[Platzhalter]</dd></div>
+        <div><dt>Handelssegment</dt><dd class="ph">[Platzhalter]</dd></div>
+        <div><dt>Objekte im Bestand</dt><dd class="ph">[Platzhalter]</dd></div>
+      </dl>
+    </div>
+
+    <figure class="hero-figure wrap reveal">
+      <div class="ph-img">
+        <span>Hero — Postgalerie Speyer, Frontalansicht der Sandsteinfassade, Vormittagslicht, streng frontal, Himmel oben angeschnitten</span>
+      </div>
+      <figcaption class="ph">Bildunterschrift — Objekt, Stadt, Straße</figcaption>
+    </figure>
+  </section>
+
+  <div class="wrap divider" aria-hidden="true">
+    <svg class="wline" viewBox="0 0 1200 22" preserveAspectRatio="none"><path d="M0,21 L1160,21 M1160,21 L1170,3 L1180,21 L1190,3 L1199,21"/></svg>
+  </div>
+
+  <!-- ══ Portfolio ═════════════════════════════════════════ -->
+  <section id="portfolio" aria-labelledby="h-portfolio">
+    <div class="wrap grid12">
+      <div class="sec-head reveal">
+        <p class="eyebrow">01 — Portfolio · Platzhalter</p>
+        <h2 id="h-portfolio"><span class="ph">Überschrift als Aussage, nicht als Etikett</span></h2>
+      </div>
+
+      <div class="sec-body reveal" style="--d:1">
+        <p class="prose ph">
+          Platzhaltertext für den Einführungsabsatz zum Bestand. Hier stehen später zwei bis drei
+          Sätze mit Zahlen statt Adjektiven — Anzahl der Standorte, Gesamtfläche, Anteil vermietet.
+          Jede Aussage bekommt Stadt und Straße.
+        </p>
+      </div>
+    </div>
+
+    <div class="wrap grid12 objects">
+      <article class="obj obj-a reveal">
+        <div class="ph-img"><span>Objekt 1 — Frontalansicht, 4:3, Tageslicht</span></div>
+        <p class="eyebrow">Stadt · Straße</p>
+        <h3 class="ph">Objektname</h3>
+        <dl>
+          <dt>Nutzung</dt><dd class="ph">[Platzhalter]</dd>
+          <dt>Fläche</dt><dd class="ph num">[Platzhalter]</dd>
+          <dt>Status</dt><dd class="ph">[Platzhalter]</dd>
+        </dl>
+      </article>
+
+      <article class="obj obj-b reveal" style="--d:1">
+        <div class="ph-img"><span>Objekt 2 — Hochformat, 3:4</span></div>
+        <p class="eyebrow">Stadt · Straße</p>
+        <h3 class="ph">Objektname</h3>
+        <dl>
+          <dt>Nutzung</dt><dd class="ph">[Platzhalter]</dd>
+          <dt>Fläche</dt><dd class="ph num">[Platzhalter]</dd>
+          <dt>Status</dt><dd class="ph">[Platzhalter]</dd>
+        </dl>
+      </article>
+
+      <article class="obj obj-c reveal">
+        <div class="ph-img"><span>Objekt 3 — Frontalansicht, 4:3, Tageslicht</span></div>
+        <p class="eyebrow">Stadt · Straße</p>
+        <h3 class="ph">Objektname</h3>
+        <dl>
+          <dt>Nutzung</dt><dd class="ph">[Platzhalter]</dd>
+          <dt>Fläche</dt><dd class="ph num">[Platzhalter]</dd>
+          <dt>Status</dt><dd class="ph">[Platzhalter]</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="wrap">
+      <div class="table-scroll reveal">
+        <table>
+          <caption class="eyebrow">Gesamtbestand — Platzhalterzeilen</caption>
+          <thead>
+            <tr>
+              <th scope="col">Objekt</th>
+              <th scope="col">Stadt</th>
+              <th scope="col">Nutzung</th>
+              <th scope="col" class="n">Fläche</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
+            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
+            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
+            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
+            <tr><td class="ph">Objektname</td><td class="ph">Stadt</td><td class="ph">Nutzung</td><td class="n ph">0.000</td><td class="ph">Status</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap divider" aria-hidden="true">
+    <svg class="wline" viewBox="0 0 1200 22" preserveAspectRatio="none"><path d="M0,21 L1160,21 M1160,21 L1170,3 L1180,21 L1190,3 L1199,21"/></svg>
+  </div>
+
+  <!-- ══ Unternehmen ═══════════════════════════════════════ -->
+  <section id="unternehmen" aria-labelledby="h-unternehmen">
+    <div class="wrap grid12">
+      <div class="sec-head reveal">
+        <p class="eyebrow">02 — Unternehmen · Platzhalter</p>
+        <h2 id="h-unternehmen"><span class="ph">Umnutzung statt Abriss</span></h2>
+      </div>
+
+      <div class="sec-body reveal" style="--d:1">
+        <p class="prose ph">
+          Platzhalter für den Kernabsatz: warum ERWE leerstehende Handelsflächen kauft, statt
+          Neubauflächen zu entwickeln. Ein Gedanke pro Satz, Sätze unter zwanzig Wörtern.
+        </p>
+        <p class="prose ph">
+          Zweiter Platzhalterabsatz zur Bestandshaltung und zum Stand der Restrukturierung.
+          Benannt, nicht umschrieben — Verschweigen kostet mehr Glaubwürdigkeit als Zugeben.
+        </p>
+
+        <figure class="hero-figure">
+          <div class="ph-img" style="aspect-ratio:16/9"><span>Unternehmen — Innenraum einer laufenden Umnutzung, Rohbau oder frisch übergebene Fläche, natürliches Licht, keine Personen im Fokus</span></div>
+        </figure>
+
+        <blockquote>
+          <p class="ph">Platzhalter für ein Zitat aus dem Vorstand. Maximal vierzig Zeichen pro Zeile, keine Anführungsgrafik.</p>
+          <footer class="ph">Name · Funktion</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap divider" aria-hidden="true">
+    <svg class="wline" viewBox="0 0 1200 22" preserveAspectRatio="none"><path d="M0,21 L1160,21 M1160,21 L1170,3 L1180,21 L1190,3 L1199,21"/></svg>
+  </div>
+
+  <!-- ══ Investor Relations ════════════════════════════════ -->
+  <section id="ir" aria-labelledby="h-ir">
+    <div class="wrap grid12">
+      <div class="sec-head reveal">
+        <p class="eyebrow">03 — Investor Relations · Platzhalter</p>
+        <h2 id="h-ir"><span class="ph">Zahlen, Berichte, Stand der Restrukturierung</span></h2>
+      </div>
+
+      <div class="sec-body reveal" style="--d:1">
+        <p class="prose ph">
+          Platzhalter für den Einführungsabsatz zu Aktie und Anleihe. Kein Live-Kurs-Widget,
+          keine Prognosen, keine Renditeaussagen.
+        </p>
+
+        <!-- Conversion §11.2 — Geschäftsbericht als Download -->
+        <div class="rows">
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Geschäftsbericht — Platzhalter</span><span class="meta ph">PDF · 0,0 MB</span></a>
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Halbjahresfinanzbericht — Platzhalter</span><span class="meta ph">PDF · 0,0 MB</span></a>
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Anleihebedingungen — Platzhalter</span><span class="meta ph">PDF · 0,0 MB</span></a>
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Hauptversammlung — Platzhalter</span><span class="meta ph">PDF · 0,0 MB</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap divider" aria-hidden="true">
+    <svg class="wline" viewBox="0 0 1200 22" preserveAspectRatio="none"><path d="M0,21 L1160,21 M1160,21 L1170,3 L1180,21 L1190,3 L1199,21"/></svg>
+  </div>
+
+  <!-- ══ Presse ════════════════════════════════════════════ -->
+  <section id="presse" aria-labelledby="h-presse">
+    <div class="wrap grid12">
+      <div class="sec-head reveal">
+        <p class="eyebrow">04 — Presse · Platzhalter</p>
+        <h2 id="h-presse"><span class="ph">Mitteilungen</span></h2>
+      </div>
+
+      <div class="sec-body reveal" style="--d:1">
+        <div class="rows">
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Ad-hoc</span></a>
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Presse</span></a>
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Presse</span></a>
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Ad-hoc</span></a>
+          <a class="row" href="#"><span class="date ph">TT.MM.JJJJ</span><span class="title ph">Titel der Pressemitteilung — Platzhalter</span><span class="meta">Presse</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Kontaktband ═══════════════════════════════════════ -->
+  <section class="contact" id="kontakt" aria-labelledby="h-kontakt">
+    <div class="wrap">
+      <p class="eyebrow reveal">05 — Kontakt · Platzhalter</p>
+      <h2 id="h-kontakt" class="reveal" style="--d:1"><span class="ph">Sprechen Sie mit Investor Relations</span></h2>
+
+      <div class="grid12 contact-grid">
+        <div class="contact-person reveal">
+          <h3 class="ph">Name der Ansprechpartnerin</h3>
+          <dl>
+            <dt>Funktion</dt><dd class="ph">[Platzhalter]</dd>
+            <dt>Telefon</dt><dd><a class="ph num" href="tel:">[Platzhalter]</a></dd>
+            <dt>E-Mail</dt><dd><a class="ph" href="mailto:">[Platzhalter]</a></dd>
+            <dt>Erreichbarkeit</dt><dd class="ph">Mo–Fr, [Platzhalter] Uhr</dd>
+          </dl>
+          <a class="btn btn-primary" href="mailto:">Anfrage senden</a>
+        </div>
+
+        <div class="contact-where reveal" style="--d:1">
+          <p class="eyebrow">Sitz der Gesellschaft</p>
+          <address class="ph" style="font-style:normal; margin-top:0.75rem">
+            Straße und Hausnummer — Platzhalter<br>
+            PLZ Stadt — Platzhalter
+          </address>
+          <div class="ph-img ph-map"><span>Karte — Sitz der Gesellschaft, statischer Kartenausschnitt</span></div>
+        </div>
+      </div>
+
+      <div class="contact-sign" aria-hidden="true">
+        <svg class="wline" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,38 L1120,38 M1120,38 L1140,4 L1160,38 L1180,4 L1198,38"/></svg>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ Footer ══════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="wrap grid12 foot-grid">
+    <div class="foot-col">
+      <h3>Unternehmen</h3>
+      <ul>
+        <li><a href="#unternehmen">Über ERWE</a></li>
+        <li><a href="#unternehmen">Vorstand</a></li>
+        <li><a href="#unternehmen">Aufsichtsrat</a></li>
+        <li><a href="#unternehmen">Karriere</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h3>Portfolio</h3>
+      <ul>
+        <li><a href="#portfolio">Objekte</a></li>
+        <li><a href="#portfolio">Flächen mieten</a></li>
+        <li><a href="#portfolio">Objekte anbieten</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h3>Investor Relations</h3>
+      <ul>
+        <li><a href="#ir">Aktie</a></li>
+        <li><a href="#ir">Anleihe</a></li>
+        <li><a href="#ir">Finanzberichte</a></li>
+        <li><a href="#ir">Hauptversammlung</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h3>Presse &amp; Kontakt</h3>
+      <ul>
+        <li><a href="#presse">Pressemitteilungen</a></li>
+        <li><a href="#presse">Ad-hoc-Mitteilungen</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Conversion §11.5 — Pflichtangaben gleichrangig sichtbar -->
+  <div class="wrap foot-legal">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+    <a href="#">Pflichtveröffentlichungen</a>
+    <a href="#">Directors’ Dealings</a>
+    <span>© <span class="num">2026</span> ERWE Immobilien AG</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const header = document.querySelector('.site-header');
+  const onScroll = () => header.classList.toggle('compact', window.scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // W-Linien: Pfadlänge messen, damit stroke-dashoffset exakt sitzt
+  document.querySelectorAll('.wline:not(.nav .wline) path').forEach(p => {
+    p.closest('.wline').style.setProperty('--len', Math.ceil(p.getTotalLength()));
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+
+  document.querySelectorAll('.reveal, .divider .wline, .contact-sign .wline').forEach(el => io.observe(el));
+})();
+</script>
 
 </body>
 </html>
