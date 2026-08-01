@@ -253,7 +253,7 @@ Flughafenpassage. Das wird ersatzlos gestrichen. **Gezeigt werden Gebäude.**
 |---|---|---|---|
 | Hero | Postgalerie Speyer, Frontalansicht der Sandsteinfassade | Vormittagslicht, Himmel oben leicht angeschnitten, streng frontal | Objektfoto ERWE, neu fotografieren lassen; für den Pitch: bestehende Aufnahme, farbkorrigiert |
 | Portfolio | Je ein Objekt, gleiche Perspektive | Alle 4:3, alle frontal, alle Tageslicht — die Serie muss als Serie lesbar sein | ERWE-Bestand; Lücken durch Architekturaufnahmen deutscher Innenstadtbauten schließen |
-| Unternehmen | Innenraum einer laufenden Umnutzung, als Vollbild-Medienfläche mit Eyebrow+Headline unten (`.media-feature`, Abweichung 2026-08-02) | Rohbau oder frisch übergebene Fläche, natürliches Licht, keine Personen im Fokus | ERWE-Bestand (`unternehmen.jpg`) |
+| Unternehmen | Innenraum einer laufenden Umnutzung, als Vollbild-Medienfläche mit Eyebrow+Headline unten (`.media-feature`, Abweichung 2026-08-02) | Rohbau oder frisch übergebene Fläche, natürliches Licht, keine Personen im Fokus | Gemuteter Auto-Loop `assets/unternehmen-loop.mp4` (Stockvideo, Pexels-Lizenz, s. §13); Standbild `unternehmen.jpg` (ERWE-Bestand) als Poster/Fallback bei `prefers-reduced-motion` |
 | Kontakt | Kein Bild | Die `--accent`-Fläche trägt allein | — |
 
 **Bildregeln**
@@ -309,7 +309,7 @@ Alle Assets liegen in `assets/`. Logo: `assets/erwe-logo.svg` (Original in `#236
 | ERWE-Wortmarke (`#236384`, `#6e6e6e`) | Herkunft des Akzentblaus und der W-Zacke. |
 | Postgalerie Speyer — Sandsteinfassade, Mansarddach | Material- und Lichtreferenz für die Bildserie. |
 | [erwe-ag.com](https://www.erwe-ag.com) (Bestand) | Inhaltliche Vollständigkeit — Struktur und Optik werden ersetzt. |
-| [brookfield.com](https://www.brookfield.com) (Abweichung 2026-08-02) | Größenraster (Endwerte, Tracking), Hover-Zoom auf Bildkarten, Vollbild-Medienfläche mit Eyebrow+Headline unten verankert (`.media-feature`, ersetzt deren Autoplay-Video-Sektion — reales ERWE-Videomaterial existiert nicht, geprüft auf erwe-ag.com; stattdessen ein reales ERWE-Foto in identischer Anordnung). **Nicht** übernommen: deren Schriftdateien (proprietär), Creme-Palette, Autoplay-Video selbst, Karussells. |
+| [brookfield.com](https://www.brookfield.com) (Abweichung 2026-08-02) | Größenraster (Endwerte, Tracking), Hover-Zoom auf Bildkarten, Vollbild-Medienfläche mit Eyebrow+Headline unten verankert (`.media-feature`), inkl. gemutetem Auto-Loop-Video wie im Original (nicht nur Standfoto, Nachtrag 2026-08-02: reales ERWE-Videomaterial existiert nicht, geprüft auf erwe-ag.com — deshalb ein thematisch passendes, lizenzfreies Stockvideo: „Construction Inside A Building" von Pixly Videos, [pexels.com/video/1538132](https://www.pexels.com/video/construction-inside-a-building-1538132/), Pexels-Lizenz — kostenlose kommerzielle Nutzung, keine Zuschreibung nötig, dennoch dokumentiert; Standfoto bleibt Poster & `prefers-reduced-motion`-Fallback). **Nicht** übernommen: deren Schriftdateien (proprietär), Creme-Palette, Karussells. |
 
 ---
 

@@ -289,6 +289,16 @@
   }
   .media-feature .photo { position: absolute; inset: 0; }
   .media-feature .photo img { width: 100%; height: 100%; }
+  .media-feature-video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  /* Standard: Video aktiv, Standfoto verdeckt. Bei reduzierter Bewegung (§7) greift
+     ausschließlich das reale ERWE-Foto — Video wird ausgeblendet, nicht nur pausiert. */
+  .media-feature-fallback { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .media-feature-video { display: none; }
+    .media-feature-fallback { display: block; }
+  }
   .media-feature-scrim {
     position: absolute; inset: 0;
     background: linear-gradient(to top, color-mix(in oklch, var(--ink) 78%, transparent) 0%, transparent 55%);
@@ -633,11 +643,20 @@
     </div>
 
     <!-- Vollbild-Medienfläche, Anordnung wie brookfield.com „full-width-video-embed":
-         großformatige Fläche, Eyebrow + Überschrift unten verankert. Reales ERWE-Videomaterial
-         existiert nicht (auf erwe-ag.com geprüft) — deshalb ein reales ERWE-Foto statt Fremd-
-         oder Stockvideo; die Anordnung entspricht dem Vorbild 1:1. -->
+         großformatige Fläche, Eyebrow + Überschrift unten verankert, gemuteter Auto-Loop.
+         Reales ERWE-Videomaterial existiert nicht (auf erwe-ag.com geprüft) — deshalb ein
+         freies, lizenzkonformes Stockvideo einer Rohbau-/Umnutzungsszene (thematisch stimmig,
+         keine erkennbare fremde Marke/Person): Pexels-Lizenz (kostenlose kommerzielle Nutzung,
+         keine Zuschreibung nötig), „Construction Inside A Building" von Pixly Videos,
+         https://www.pexels.com/video/construction-inside-a-building-1538132/ — Datei
+         assets/unternehmen-loop.mp4 (HD 1280×720, ~1,5 MB). Poster/Fallback bei
+         prefers-reduced-motion und fehlender Video-Unterstützung: das reale ERWE-Foto. -->
     <figure class="media-feature reveal">
-      <div class="photo"><img src="assets/unternehmen.jpg" alt="Innenraum eines Bürogebäudes im Umbau" loading="lazy"></div>
+      <video class="media-feature-video" poster="assets/unternehmen.jpg" autoplay muted loop playsinline
+             aria-label="Rohbauarbeiten während einer Umnutzung, Symbolbild">
+        <source src="assets/unternehmen-loop.mp4" type="video/mp4">
+      </video>
+      <div class="photo media-feature-fallback"><img src="assets/unternehmen.jpg" alt="Innenraum eines Bürogebäudes im Umbau" loading="lazy"></div>
       <div class="media-feature-scrim" aria-hidden="true"></div>
       <figcaption class="media-feature-text">
         <span class="eyebrow">Umnutzung statt Abriss</span>
